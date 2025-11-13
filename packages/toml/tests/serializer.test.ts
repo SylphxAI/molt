@@ -90,7 +90,7 @@ describe('TOML Serializer', () => {
       const obj = {
         point: { x: 1, y: 2 },
       };
-      const toml = stringifyTOML(obj);
+      const toml = stringifyTOML(obj, { maxInlineKeys: 2 });
       expect(toml).toContain('point = { x = 1, y = 2 }');
     });
 

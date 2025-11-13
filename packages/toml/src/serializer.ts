@@ -14,7 +14,7 @@ import type { StringifyTOMLOptions } from './types.js';
  * @returns TOML string
  */
 export function stringifyTOML(value: unknown, options: StringifyTOMLOptions = {}): string {
-  const { inlineTables = true, maxInlineKeys = 2, quoteKeys = false } = options;
+  const { inlineTables = true, maxInlineKeys = 0, quoteKeys = false } = options;
 
   const serializer = new TOMLSerializer(inlineTables, maxInlineKeys, quoteKeys);
   return serializer.stringify(value);

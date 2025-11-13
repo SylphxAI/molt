@@ -89,7 +89,12 @@ class TOMLParser {
         if (!current[key]) {
           current[key] = {};
         }
-        current = current[key];
+        // If we encounter an array, navigate to the last item
+        if (Array.isArray(current[key])) {
+          current = current[key][current[key].length - 1];
+        } else {
+          current = current[key];
+        }
       }
 
       const lastKey = path[path.length - 1]!.trim();
@@ -176,11 +181,16 @@ class TOMLParser {
       return this.parseInlineTable(trimmed);
     }
 
-    // Date/time (RFC 3339) - only if parseDates is enabled
-    if (this.parseDates && /^\d{4}-\d{2}-\d{2}[T ]/.test(trimmed)) {
-      const date = new Date(trimmed);
-      if (!isNaN(date.getTime())) {
-        return date;
+    // Date/time (RFC 3339) - check format first, then decide how to parse
+    if (/^\d{4}-\d{2}-\d{2}[T ]/.test(trimmed)) {
+      if (this.parseDates) {
+        const date = new Date(trimmed);
+        if (!isNaN(date.getTime())) {
+          return date;
+        }
+      } else {
+        // parseDates is false, return as string to prevent number parsing
+        return trimmed;
       }
     }
 
@@ -206,15 +216,7 @@ class TOMLParser {
     let result = '';
     let foundEnd = false;
 
-    // Skip opening """
-    let content = this.lines[this.currentLine]!.trim().slice(3);
-
-    // Check if closing """ is on the same line
-    if (content.endsWith('"""')) {
-      return this.parseBasicString(content.slice(0, -3));
-    }
-
-    result = content + '\n';
+    // Move to next line (the opening """ is on the current line in the value part)
     this.currentLine++;
 
     while (this.currentLine < this.lines.length) {
@@ -240,15 +242,7 @@ class TOMLParser {
     let result = '';
     let foundEnd = false;
 
-    // Skip opening '''
-    let content = this.lines[this.currentLine]!.trim().slice(3);
-
-    // Check if closing ''' is on the same line
-    if (content.endsWith("'''")) {
-      return content.slice(0, -3);
-    }
-
-    result = content + '\n';
+    // Move to next line (the opening ''' is on the current line in the value part)
     this.currentLine++;
 
     while (this.currentLine < this.lines.length) {
