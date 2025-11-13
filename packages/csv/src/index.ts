@@ -70,5 +70,18 @@ export { CSVError, ParseError } from './types.js';
 export { parseCSV } from './parser.js';
 export { stringifyCSV } from './serializer.js';
 
+// Export WASM accelerated functions
+export {
+  parseWithWasm,
+  stringifyWithWasm,
+  parseSync,
+  stringifySync,
+  initWasm,
+  isWasmAvailable,
+  isWasmEnabled,
+  disableWasm,
+  enableWasm,
+} from './wasm-loader.js';
+
 // Default export
 export default MoltCSV;

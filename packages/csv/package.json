@@ -19,7 +19,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "wasm-pkg"
   ],
   "scripts": {
     "build": "tsup",

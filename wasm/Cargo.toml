@@ -1,5 +1,5 @@
 [workspace]
-members = ["core", "json"]
+members = ["core", "json", "csv"]
 resolver = "2"
 
 [workspace.package]

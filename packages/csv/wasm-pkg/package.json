@@ -1,0 +1,24 @@
+{
+  "name": "molt-csv-wasm",
+  "type": "module",
+  "collaborators": [
+    "Sylphx <https://github.com/SylphxAI>"
+  ],
+  "description": "WASM-accelerated CSV transformer for molt",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SylphxAI/molt"
+  },
+  "files": [
+    "molt_csv_wasm_bg.wasm",
+    "molt_csv_wasm.js",
+    "molt_csv_wasm.d.ts"
+  ],
+  "main": "molt_csv_wasm.js",
+  "types": "molt_csv_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

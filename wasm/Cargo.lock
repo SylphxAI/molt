@@ -35,6 +35,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "molt-csv-wasm"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "molt-json-wasm"
 version = "0.1.0"
 dependencies = [
