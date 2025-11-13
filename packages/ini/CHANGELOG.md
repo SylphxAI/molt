@@ -1,5 +1,18 @@
 # @sylphx/molt-ini
 
+## 1.0.1
+
+### Patch Changes
+
+- 2202cd9: # v1.0.1: Documentation and URL Updates
+
+  Minor fixes and documentation improvements:
+
+  - Updated website URL to molt.sylphx.com
+  - Fixed npm package links
+  - Improved repository URLs
+  - Updated social media links (Twitter → X)
+
 ## 1.0.0
 
 ### Major Changes
