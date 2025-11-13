@@ -1,0 +1,58 @@
+{
+  "name": "@sylphx/molt-ini",
+  "version": "0.1.0",
+  "description": "High-performance INI parser and serializer",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "bench": "vitest bench",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "ini",
+    "parser",
+    "serializer",
+    "config",
+    "configuration",
+    "windows",
+    "git",
+    "performance"
+  ],
+  "author": "Sylphx",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylphx/molt.git",
+    "directory": "packages/ini"
+  },
+  "bugs": {
+    "url": "https://github.com/sylphx/molt/issues"
+  },
+  "homepage": "https://github.com/sylphx/molt/tree/main/packages/ini#readme",
+  "devDependencies": {
+    "ini": "^5.0.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
