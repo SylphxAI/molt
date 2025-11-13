@@ -170,6 +170,7 @@ export {
   smartCleanSync,
   setEngineStrategies,
   resetEngineStrategies,
+  getPlatformInfo,
   getPerformanceStats,
   resetPerformanceCache,
   benchmarkEngines,

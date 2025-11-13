@@ -21,28 +21,106 @@ export interface EngineStrategy {
 }
 
 /**
- * Default engine strategies (can be customized)
+ * Platform detection
  */
-const DEFAULT_STRATEGIES: EngineStrategy[] = [
-  {
-    minSize: 0,
-    maxSize: 5000, // < 5KB: TypeScript is fastest
-    clean: (input) => tsClean(input),
-    name: 'TypeScript',
-  },
-  {
-    minSize: 5000,
-    maxSize: 100000, // 5KB - 100KB: Regular WASM is competitive
-    clean: cleanWithWasm,
-    name: 'WASM',
-  },
-  {
-    minSize: 100000,
-    maxSize: Infinity, // > 100KB: Try SIMD (may help on some platforms)
-    clean: cleanWithWasmSimd,
-    name: 'WASM-SIMD',
-  },
-];
+interface PlatformInfo {
+  arch: string;
+  isARM: boolean;
+  runtime: 'node' | 'browser' | 'bun' | 'deno' | 'unknown';
+}
+
+function detectPlatform(): PlatformInfo {
+  // Detect runtime
+  let runtime: PlatformInfo['runtime'] = 'unknown';
+  if (typeof process !== 'undefined') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (typeof (globalThis as any).Bun !== 'undefined') {
+      runtime = 'bun';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } else if (typeof (globalThis as any).Deno !== 'undefined') {
+      runtime = 'deno';
+    } else {
+      runtime = 'node';
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } else if (typeof (globalThis as any).window !== 'undefined') {
+    runtime = 'browser';
+  }
+
+  // Detect architecture
+  let arch = 'unknown';
+  let isARM = false;
+
+  try {
+    if (typeof process !== 'undefined' && process.arch) {
+      arch = process.arch;
+      isARM = arch === 'arm64' || arch === 'arm';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } else if (typeof (globalThis as any).navigator !== 'undefined') {
+      // Browser detection (less reliable)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const ua = ((globalThis as any).navigator.userAgent as string).toLowerCase();
+      isARM = ua.includes('arm') || ua.includes('aarch64');
+      arch = isARM ? 'arm' : 'x64';
+    }
+  } catch {
+    // Fallback
+  }
+
+  return { arch, isARM, runtime };
+}
+
+const PLATFORM = detectPlatform();
+
+/**
+ * Default engine strategies (platform-optimized)
+ *
+ * ARM platforms show negative performance with SIMD, so we avoid it.
+ * x86-64 platforms may benefit from SIMD on large inputs.
+ */
+function getDefaultStrategies(): EngineStrategy[] {
+  if (PLATFORM.isARM) {
+    // ARM: SIMD shows negative performance, use regular WASM for large inputs
+    return [
+      {
+        minSize: 0,
+        maxSize: 5000, // < 5KB: TypeScript is fastest
+        clean: (input) => tsClean(input),
+        name: 'TypeScript',
+      },
+      {
+        minSize: 5000,
+        maxSize: Infinity, // >= 5KB: Regular WASM (no SIMD on ARM)
+        clean: cleanWithWasm,
+        name: 'WASM',
+      },
+    ];
+  } else {
+    // x86-64 or unknown: Use SIMD for large inputs
+    return [
+      {
+        minSize: 0,
+        maxSize: 5000, // < 5KB: TypeScript is fastest
+        clean: (input) => tsClean(input),
+        name: 'TypeScript',
+      },
+      {
+        minSize: 5000,
+        maxSize: 100000, // 5KB - 100KB: Regular WASM is competitive
+        clean: cleanWithWasm,
+        name: 'WASM',
+      },
+      {
+        minSize: 100000,
+        maxSize: Infinity, // > 100KB: Try SIMD (may help on x86-64)
+        clean: cleanWithWasmSimd,
+        name: 'WASM-SIMD',
+      },
+    ];
+  }
+}
+
+const DEFAULT_STRATEGIES = getDefaultStrategies();
 
 /**
  * Runtime performance cache
@@ -163,6 +241,16 @@ export async function smartClean(
  */
 export function smartCleanSync(input: string): string {
   return tsClean(input);
+}
+
+/**
+ * Get detected platform information
+ *
+ * Returns information about the detected platform, which is used
+ * to optimize engine selection (e.g., disable SIMD on ARM).
+ */
+export function getPlatformInfo(): PlatformInfo {
+  return { ...PLATFORM };
 }
 
 /**
