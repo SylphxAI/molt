@@ -1,6 +1,6 @@
 {
   "name": "@sylphx/molt-csv",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CSV transformer - handle CSV with type preservation",
   "type": "module",
   "main": "./dist/index.cjs",

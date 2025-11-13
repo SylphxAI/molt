@@ -1,5 +1,23 @@
 # @sylphx/molt
 
+## 1.0.2
+
+### Patch Changes
+
+- eaf7f9e: # v1.0.2: Proper CI/CD Release
+
+  Republish all packages with proper CI/CD workflow to ensure correct workspace dependencies and git tags. Previous 1.0.1 versions were published manually and have been deprecated.
+
+- Updated dependencies [eaf7f9e]
+  - @sylphx/molt-json@1.0.2
+  - @sylphx/molt-yaml@1.0.2
+  - @sylphx/molt-toml@1.0.2
+  - @sylphx/molt-csv@1.0.2
+  - @sylphx/molt-xml@1.0.2
+  - @sylphx/molt-ini@1.0.2
+  - @sylphx/molt-msgpack@1.0.2
+  - @sylphx/molt-toon@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
