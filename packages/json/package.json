@@ -1,6 +1,6 @@
 {
   "name": "@sylphx/molt-json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The fastest JSON transformer - 380x faster with dirty cleaning, type preservation, and streaming",
   "type": "module",
   "main": "./dist/index.cjs",
