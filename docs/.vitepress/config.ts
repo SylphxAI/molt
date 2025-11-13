@@ -143,14 +143,14 @@ export default defineConfig({
     ['meta', { property: 'og:site_name', content: 'Molt' }],
     ['meta', { property: 'og:title', content: 'Molt - High-Performance Data Transformation' }],
     ['meta', { property: 'og:description', content: 'High-performance data transformation stack for JSON, YAML, TOML, CSV, XML, INI, MessagePack, and TOON. Up to 415x faster than alternatives.' }],
-    ['meta', { property: 'og:image', content: 'https://molt.vercel.app/og-image.png' }],
-    ['meta', { property: 'og:url', content: 'https://molt.vercel.app' }],
+    ['meta', { property: 'og:image', content: 'https://molt.sylphx.com/og-image.png' }],
+    ['meta', { property: 'og:url', content: 'https://molt.sylphx.com' }],
 
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Molt - High-Performance Data Transformation' }],
     ['meta', { name: 'twitter:description', content: 'High-performance data transformation stack. Up to 415x faster than alternatives.' }],
-    ['meta', { name: 'twitter:image', content: 'https://molt.vercel.app/og-image.png' }],
+    ['meta', { name: 'twitter:image', content: 'https://molt.sylphx.com/og-image.png' }],
 
     // Additional SEO
     ['meta', { name: 'keywords', content: 'data transformation, JSON parser, YAML parser, TOML parser, CSV parser, XML parser, INI parser, MessagePack, high performance, TypeScript' }],

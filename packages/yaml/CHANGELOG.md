@@ -35,4 +35,4 @@
 
   ## Documentation
 
-  Visit https://molt.vercel.app for complete documentation.
+  Visit https://molt.sylphx.com for complete documentation.

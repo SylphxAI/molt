@@ -9,7 +9,7 @@
 
 > 🏆 **415x faster YAML** | **9x faster TOML** | **2-3x faster INI** | **30-60% LLM token savings**
 
-📦 [npm](https://www.npmjs.com/search?q=%40sylphx%2Fmolt) | 🐙 [GitHub](https://github.com/SylphxAI/molt) | 🐦 [X](https://x.com/SylphxAI)
+📦 [npm](https://www.npmjs.com/package/@sylphx/molt) | 🐙 [GitHub](https://github.com/SylphxAI/molt) | 🐦 [X](https://x.com/SylphxAI)
 
 ---
 
