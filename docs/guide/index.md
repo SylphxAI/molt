@@ -4,7 +4,7 @@ Welcome to Molt, the high-performance data transformation stack! This guide will
 
 ## What is Molt?
 
-Molt (蛻變, meaning "transformation") is a comprehensive suite of data transformation libraries built for performance and developer experience. Each package in the Molt ecosystem is designed to handle a specific data format with extreme efficiency and type safety.
+Molt is a comprehensive suite of data transformation libraries built for performance and developer experience. Each package in the Molt ecosystem is designed to handle a specific data format with extreme efficiency and type safety.
 
 ### Available Packages
 

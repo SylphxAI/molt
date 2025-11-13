@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: "Molt"
-  text: "蛻變 - Data Transformation Stack"
+  text: "Data Transformation Stack"
   tagline: High-performance data transformation libraries for JSON, XML, YAML, TOML, and CSV
   image:
     src: /logo.svg

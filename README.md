@@ -1,4 +1,4 @@
-# 🚀 Molt - 蛻變
+# 🚀 Molt
 
 [![CI](https://github.com/sylphx/molt/workflows/CI/badge.svg)](https://github.com/sylphx/molt/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
