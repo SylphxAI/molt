@@ -9,7 +9,7 @@
 
 > 🏆 **415x faster YAML** | **9x faster TOML** | **2-3x faster INI** | **30-60% LLM token savings**
 
-📦 [npm](https://www.npmjs.com/org/sylphx) | 🐙 [GitHub](https://github.com/SylphxAI/molt) | 🐦 [Twitter](https://x.com/SylphxAI)
+📦 [npm](https://www.npmjs.com/search?q=%40sylphx%2Fmolt) | 🐙 [GitHub](https://github.com/SylphxAI/molt) | 🐦 [X](https://x.com/SylphxAI)
 
 ---
 
@@ -409,4 +409,4 @@ If you find Molt useful, please consider giving it a star ⭐
 
 ---
 
-**Built with ❤️ by Sylphx** | [Website](https://sylph.ai) | [Twitter](https://twitter.com/sylphxai)
+**Built with ❤️ by Sylphx** | [Website](https://sylph.ai) | [X](https://x.com/SylphxAI)
