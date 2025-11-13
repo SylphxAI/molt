@@ -1,5 +1,5 @@
 import { bench, describe } from 'vitest';
-import { parseXML, toObject, cleanDirtyXML } from '../src/index.js';
+import { parseXML, molt, cleanDirtyXML } from '../src/index.js';
 import { XMLParser } from 'fast-xml-parser';
 import xml2js from 'xml2js';
 
@@ -181,15 +181,15 @@ describe('XML Parsing Performance', () => {
 
 describe('XML to Object Conversion Performance', () => {
   bench('molt-xml: toObject simple', () => {
-    toObject(simpleXML);
+    molt(simpleXML);
   });
 
   bench('molt-xml: toObject complex', () => {
-    toObject(complexXML);
+    molt(complexXML);
   });
 
   bench('molt-xml: toObject attributes', () => {
-    toObject(attributesXML);
+    molt(attributesXML);
   });
 
   // Competitors with object output
@@ -211,7 +211,7 @@ describe('Dirty XML Cleaning Performance', () => {
   });
 
   bench('molt-xml: toObject from dirty XML', () => {
-    toObject(dirtyXML, { cleanDirty: true });
+    molt(dirtyXML, { cleanDirty: true });
   });
 });
 
@@ -241,7 +241,7 @@ describe('XML Large Document Performance', () => {
   });
 
   bench('molt-xml: toObject 1000 items', () => {
-    toObject(largeXML);
+    molt(largeXML);
   });
 
   bench('fast-xml-parser: parse 1000 items', () => {
@@ -271,14 +271,14 @@ describe('XML with Mixed Content', () => {
   });
 
   bench('molt-xml: mixed content to object', () => {
-    toObject(mixedXML);
+    molt(mixedXML);
   });
 });
 
 describe('XML Round-trip Performance', () => {
   bench('molt-xml: parse → toObject → parse', () => {
     const doc = parseXML(complexXML);
-    const obj = toObject(complexXML);
+    const obj = molt(complexXML);
     parseXML(complexXML);
   });
 });
