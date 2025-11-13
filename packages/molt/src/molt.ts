@@ -6,12 +6,14 @@ import { molt as moltJSON } from '@sylphx/molt-json';
 import { molt as moltXML } from '@sylphx/molt-xml';
 import { molt as moltYAML } from '@sylphx/molt-yaml';
 import { molt as moltTOML } from '@sylphx/molt-toml';
+import { molt as moltINI } from '@sylphx/molt-ini';
 import { molt as moltCSV } from '@sylphx/molt-csv';
+import { parseTOON } from '@sylphx/molt-toon';
 
 /**
  * Supported data formats
  */
-export type Format = 'json' | 'xml' | 'yaml' | 'toml' | 'csv' | 'auto';
+export type Format = 'json' | 'xml' | 'yaml' | 'toml' | 'ini' | 'csv' | 'toon' | 'auto';
 
 /**
  * Transform options
@@ -40,13 +42,23 @@ export function detectFormat(input: string): Format {
     return 'json';
   }
 
+  // TOON: has table format with | delimiters (key:\n  col1 | col2 | col3)
+  if (/^[a-zA-Z_][\w-]*:\s*\n\s+[\w-]+(\s*\|\s*[\w-]+)+/m.test(trimmed)) {
+    return 'toon';
+  }
+
   // YAML: has key: value pattern or starts with ---
   if (trimmed.startsWith('---') || /^[a-zA-Z_][\w-]*:\s/m.test(trimmed)) {
     return 'yaml';
   }
 
-  // TOML: has [section] or key = value pattern
-  if (/^\[[\w.-]+\]/m.test(trimmed) || /^[a-zA-Z_][\w-]*\s*=/m.test(trimmed)) {
+  // INI: has [section] followed by key=value (differentiate from TOML by checking for =)
+  if (/^\[[\w.-]+\]\s*\n\s*[a-zA-Z_][\w-]*\s*=/m.test(trimmed)) {
+    return 'ini';
+  }
+
+  // TOML: has [section] or key = value pattern (with spaces around =)
+  if (/^\[[\w.-]+\]/m.test(trimmed) || /^[a-zA-Z_][\w-]*\s*=\s*/m.test(trimmed)) {
     return 'toml';
   }
 
@@ -73,15 +85,19 @@ export function transform(input: string, options: TransformOptions = {}): unknow
 
   switch (format) {
     case 'json':
-      return moltJSON(input, options);
+      return moltJSON(input, options as any);
     case 'xml':
-      return moltXML(input, options);
+      return moltXML(input, options as any);
     case 'yaml':
-      return moltYAML(input, options);
+      return moltYAML(input, options as any);
     case 'toml':
-      return moltTOML(input, options);
+      return moltTOML(input, options as any);
+    case 'ini':
+      return moltINI(input, options as any);
     case 'csv':
-      return moltCSV(input, options);
+      return moltCSV(input, options as any);
+    case 'toon':
+      return parseTOON(input, options as any);
     default:
       throw new Error(`Unsupported format: ${format}`);
   }

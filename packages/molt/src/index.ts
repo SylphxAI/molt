@@ -1,29 +1,29 @@
 /**
  * @sylphx/molt - Unified Data Transformation Stack
  *
- * High-performance transformers for JSON, XML, YAML, TOML, and CSV
+ * High-performance transformers for JSON, YAML, TOML, INI, CSV, XML, MessagePack, and TOON
  * with type preservation, dirty cleaning, and streaming support.
  */
 
-// Re-export JSON transformer
-export * from '@sylphx/molt-json';
+// Namespaced exports to avoid naming conflicts
+export * as JSON from '@sylphx/molt-json';
+export * as YAML from '@sylphx/molt-yaml';
+export * as TOML from '@sylphx/molt-toml';
+export * as INI from '@sylphx/molt-ini';
+export * as CSV from '@sylphx/molt-csv';
+export * as XML from '@sylphx/molt-xml';
+export * as MessagePack from '@sylphx/molt-msgpack';
+export * as TOON from '@sylphx/molt-toon';
+
+// Re-export default exports as named exports
 export { default as MoltJSON } from '@sylphx/molt-json';
-
-// Re-export XML transformer
-export * from '@sylphx/molt-xml';
-export { default as MoltXML } from '@sylphx/molt-xml';
-
-// Re-export YAML transformer
-export * from '@sylphx/molt-yaml';
 export { default as MoltYAML } from '@sylphx/molt-yaml';
-
-// Re-export TOML transformer
-export * from '@sylphx/molt-toml';
 export { default as MoltTOML } from '@sylphx/molt-toml';
-
-// Re-export CSV transformer
-export * from '@sylphx/molt-csv';
+export { default as MoltINI } from '@sylphx/molt-ini';
 export { default as MoltCSV } from '@sylphx/molt-csv';
+export { default as MoltXML } from '@sylphx/molt-xml';
+export { encode as encodeMessagePack, decode as decodeMessagePack } from '@sylphx/molt-msgpack';
+export { parseTOON, serializeTOON } from '@sylphx/molt-toon';
 
 /**
  * Unified molt API

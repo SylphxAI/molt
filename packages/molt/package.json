@@ -1,7 +1,7 @@
 {
   "name": "@sylphx/molt",
   "version": "0.1.0",
-  "description": "Unified data transformation stack - JSON, XML, YAML, TOML, CSV with type preservation",
+  "description": "Unified data transformation stack - JSON, YAML, TOML, INI, CSV, XML, MessagePack, TOON with type preservation",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -35,7 +35,10 @@
     "xml",
     "yaml",
     "toml",
+    "ini",
     "csv",
+    "messagepack",
+    "toon",
     "parser",
     "serializer",
     "transformer",
@@ -44,6 +47,8 @@
     "streaming",
     "fast",
     "performance",
+    "llm",
+    "ai",
     "sylphx"
   ],
   "author": "Sylphx",
@@ -59,10 +64,13 @@
   "homepage": "https://github.com/sylphx/molt/tree/main/packages/molt#readme",
   "dependencies": {
     "@sylphx/molt-json": "workspace:*",
-    "@sylphx/molt-xml": "workspace:*",
     "@sylphx/molt-yaml": "workspace:*",
     "@sylphx/molt-toml": "workspace:*",
-    "@sylphx/molt-csv": "workspace:*"
+    "@sylphx/molt-ini": "workspace:*",
+    "@sylphx/molt-csv": "workspace:*",
+    "@sylphx/molt-xml": "workspace:*",
+    "@sylphx/molt-msgpack": "workspace:*",
+    "@sylphx/molt-toon": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",

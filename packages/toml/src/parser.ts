@@ -35,7 +35,6 @@ class TOMLParser {
   private readonly parseDates: boolean;
   private root: Record<string, unknown> = {};
   private currentTable: Record<string, unknown> = this.root;
-  private currentPath: string[] = [];
 
   constructor(input: string, options: { parseDates: boolean }) {
     // Normalize line endings and split
@@ -108,7 +107,6 @@ class TOMLParser {
       const newTable: Record<string, unknown> = {};
       current[lastKey].push(newTable);
       this.currentTable = newTable;
-      this.currentPath = path;
     } else {
       // Regular table
       let current: any = this.root;
@@ -123,7 +121,6 @@ class TOMLParser {
         current = current[trimmedKey];
       }
       this.currentTable = current;
-      this.currentPath = path;
     }
   }
 

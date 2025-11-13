@@ -11,14 +11,17 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/' },
       { text: 'API', link: '/api/' },
       { text: 'Benchmarks', link: '/benchmarks' },
-      { 
+      {
         text: 'Packages',
         items: [
           { text: 'JSON', link: '/packages/json/' },
           { text: 'YAML', link: '/packages/yaml/' },
           { text: 'TOML', link: '/packages/toml/' },
+          { text: 'INI', link: '/packages/ini/' },
           { text: 'CSV', link: '/packages/csv/' },
           { text: 'XML', link: '/packages/xml/' },
+          { text: 'MessagePack', link: '/packages/msgpack/' },
+          { text: 'TOON', link: '/packages/toon/' },
         ]
       }
     ],
