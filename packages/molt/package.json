@@ -1,6 +1,6 @@
 {
   "name": "@sylphx/molt",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Unified data transformation stack - JSON, YAML, TOML, INI, CSV, XML, MessagePack, TOON with type preservation",
   "type": "module",
   "main": "./dist/index.cjs",

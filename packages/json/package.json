@@ -1,6 +1,6 @@
 {
   "name": "@sylphx/molt-json",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "The fastest JSON transformer - 380x faster with dirty cleaning, type preservation, and streaming",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -13,7 +13,13 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist", "wasm-pkg", "README.md", "LICENSE", "CHANGELOG.md"],
+  "files": [
+    "dist",
+    "wasm-pkg",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -68,5 +74,7 @@
   "engines": {
     "bun": ">=1.0"
   },
-  "trustedDependencies": ["@biomejs/biome"]
+  "trustedDependencies": [
+    "@biomejs/biome"
+  ]
 }
