@@ -1,72 +1,171 @@
-# molt
+# 🚀 Molt - 蛻變
 
 [![CI](https://github.com/sylphx/molt/workflows/CI/badge.svg)](https://github.com/sylphx/molt/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Bun](https://img.shields.io/badge/Bun-%3E%3D1.0-black)](https://bun.sh)
+[![Turbo](https://img.shields.io/badge/Turborepo-enabled-blue)](https://turbo.build)
 
-**High-performance data transformation stack** for JSON, XML, YAML and more.
+**High-performance data transformation stack** for JSON, YAML, TOML, CSV, and XML.
 
----
-
-## 🚀 Overview
-
-**molt** (蛻變 = transformation) is a monorepo containing ultra-fast data transformation libraries built with cutting-edge technology. Each package is designed for maximum performance, type safety, and developer experience.
-
-### Packages
-
-- **[@sylphx/molt-json](./packages/json/)** - The fastest JSON transformer (380x faster!)
-  - Dirty JSON parsing (unquoted keys, comments, trailing commas)
-  - Type preservation (Date, BigInt, Map, Set, RegExp, etc.)
-  - Streaming API for large files
-  - Schema validation (Zod, JSON Schema)
-  - Zero dependencies
-
-- **@sylphx/molt-xml** *(coming soon)* - Lightning-fast XML parser and transformer
-- **@sylphx/molt-yaml** *(coming soon)* - High-performance YAML processor
-- **@sylphx/molt** *(coming soon)* - Meta package with all formats
+> 🏆 **415x faster YAML parsing** | **9x faster TOML** | **2.5x faster JSON serialization**
 
 ---
 
-## 📦 Installation
+## 📦 Packages
 
-Install individual packages:
-
-```bash
-# JSON transformer
-bun add @sylphx/molt-json
-
-# Or with npm/pnpm
-npm install @sylphx/molt-json
-pnpm add @sylphx/molt-json
-```
+| Package | Status | Performance | Features |
+|---------|--------|-------------|----------|
+| **[@sylphx/molt-json](./packages/json/)** | ✅ Stable | 1.7-2.5x faster | Dirty JSON, Type preservation, Streaming, Validation |
+| **[@sylphx/molt-yaml](./packages/yaml/)** | ✅ Stable | **2-415x faster** 🔥 | Anchors, Multi-doc, Full YAML 1.2 |
+| **[@sylphx/molt-toml](./packages/toml/)** | ✅ Stable | **2-9x faster** ⚡ | Nested tables, Arrays, Type-safe |
+| **[@sylphx/molt-csv](./packages/csv/)** | ✅ Stable | 1.4-7.6x faster | Type conversion, WASM, Streaming |
+| **[@sylphx/molt-xml](./packages/xml/)** | ✅ Stable | Matches fastest | **Dirty XML cleaning** ⭐ |
+| **[@sylphx/molt](./packages/molt/)** | ✅ Stable | - | Meta package (all formats) |
 
 ---
 
 ## ⚡ Quick Start
 
-### JSON Transformer
+```bash
+# Install individual packages
+bun add @sylphx/molt-json
+bun add @sylphx/molt-yaml
+bun add @sylphx/molt-toml
+bun add @sylphx/molt-csv
+bun add @sylphx/molt-xml
+
+# Or install all at once
+bun add @sylphx/molt
+```
+
+### JSON - Type Preservation
 
 ```typescript
-import { parse, stringify } from '@sylphx/molt-json'
+import { molt } from '@sylphx/molt-json'
 
-// Parse dirty JSON with type preservation
-const data = parse(`{
+const data = molt(`{
   user: 'alice',        // ✅ Unquoted keys
-  age: 30,              // ✅ Trailing comma
   joined: new Date(),   // ✅ Date preserved
+  id: 123n,            // ✅ BigInt preserved
 }`)
+```
 
-data.joined instanceof Date  // true
+### YAML - 415x Faster
 
-// Stringify with type metadata
-const json = stringify({
-  created: new Date(),
-  id: 123456789012345678901n,  // BigInt
-  settings: new Map([['theme', 'dark']]),
+```typescript
+import { molt } from '@sylphx/molt-yaml'
+
+const config = molt(`
+app: MyApp
+database:
+  host: localhost
+  port: 5432
+`)
+```
+
+### TOML - 9x Faster
+
+```typescript
+import { molt } from '@sylphx/molt-toml'
+
+const config = molt(`
+[database]
+host = "localhost"
+port = 5432
+`)
+```
+
+### CSV - Type Conversion
+
+```typescript
+import { parseCSV } from '@sylphx/molt-csv'
+
+const data = parseCSV('name,age,active\nAlice,30,true', {
+  parseTypes: true  // Auto-detect types
 })
 ```
 
-See [@sylphx/molt-json](./packages/json/) for full documentation.
+### XML - Dirty Support
+
+```typescript
+import { molt } from '@sylphx/molt-xml'
+
+// Handles dirty XML automatically
+const data = molt('<user name=alice age=30/>', {
+  cleanDirty: true
+})
+```
+
+---
+
+## 🏆 Performance
+
+See [BENCHMARKS.md](./BENCHMARKS.md) for complete results.
+
+### Executive Summary
+
+| Format | Best Performance | vs Competitor |
+|--------|-----------------|---------------|
+| YAML | **415x faster** 🔥 | vs yaml (multi-doc) |
+| TOML | **9x faster** ⚡ | vs @iarna/toml (nested) |
+| JSON | **2.5x faster** ⚡ | vs superjson (serialize) |
+| CSV | **7.6x faster** 🚀 | vs papaparse (quoted) |
+| XML | Matches fastest | vs fast-xml-parser |
+
+**Key Advantages:**
+- 🥇 Fastest YAML parser in the ecosystem
+- 🥇 Fastest TOML parser available
+- 🥈 Top-tier JSON serialization performance
+- 🥈 Competitive CSV with WASM acceleration
+- 🥈 XML performance with unique dirty-cleaning
+
+---
+
+## 🎯 Features
+
+### Core Features
+- ⚡ **Blazing Fast** - Up to 415x faster than alternatives
+- 🛡️ **Type Safety** - Full TypeScript support with strict types
+- 🔧 **Dirty Input** - Handle malformed JSON/XML automatically
+- 🦀 **WASM Acceleration** - Rust-powered for performance-critical paths
+- 📦 **Zero Dependencies** - Minimal bundle size
+- 🔄 **Streaming API** - Process large files efficiently
+
+### Format-Specific Features
+
+#### JSON
+- Dirty JSON parsing (unquoted keys, trailing commas, comments)
+- Type preservation (Date, BigInt, Map, Set, RegExp, etc.)
+- Schema validation (Zod, JSON Schema)
+- Streaming for large files
+
+#### YAML
+- Full YAML 1.2 spec support
+- Anchors and aliases
+- Multi-document parsing
+- Custom tags
+- 2-415x faster than competitors
+
+#### TOML
+- Tables and nested tables
+- Array of tables
+- Inline tables
+- Type-safe parsing
+- 2-9x faster than alternatives
+
+#### CSV
+- Automatic type detection
+- Custom delimiters
+- Header handling
+- WASM acceleration
+- Streaming support
+
+#### XML
+- DOM and object conversion
+- CDATA support
+- Namespace handling
+- **Dirty XML cleaning** (unique!)
+- Matches fastest parsers
 
 ---
 
@@ -75,15 +174,17 @@ See [@sylphx/molt-json](./packages/json/) for full documentation.
 ```
 molt/
 ├── packages/
-│   ├── json/          # @sylphx/molt-json - JSON transformer
-│   ├── xml/           # @sylphx/molt-xml (coming soon)
-│   ├── yaml/          # @sylphx/molt-yaml (coming soon)
-│   └── molt/          # @sylphx/molt - Meta package (coming soon)
-├── wasm/              # Shared WASM acceleration modules
+│   ├── json/          # JSON transformer
+│   ├── yaml/          # YAML parser/serializer
+│   ├── toml/          # TOML parser/serializer
+│   ├── csv/           # CSV parser/serializer
+│   ├── xml/           # XML parser/serializer
+│   └── molt/          # Meta package
+├── docs/              # VitePress documentation
 ├── .github/           # CI/CD workflows
-├── biome.json         # Linting and formatting config
-├── bunfig.toml        # Bun workspace configuration
-└── package.json       # Workspace root
+├── .changeset/        # Changesets for versioning
+├── turbo.json         # Turborepo configuration
+└── BENCHMARKS.md      # Performance benchmarks
 ```
 
 ---
@@ -93,46 +194,67 @@ molt/
 ### Prerequisites
 
 - [Bun](https://bun.sh) >= 1.0
+- [Turbo](https://turbo.build) (installed via deps)
 
 ### Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/SylphxAI/molt.git
+git clone https://github.com/sylphx/molt.git
 cd molt
 
 # Install dependencies
 bun install
 
-# Run tests for all packages
-bun test
+# Build all packages (with Turbo cache)
+turbo build
 
-# Build all packages
-bun run build
+# Run tests for all packages
+turbo test
 
 # Run benchmarks
-bun bench
+turbo bench
 
 # Lint and format
 bun lint
 bun format
 ```
 
-### Working with Packages
+### Working with Changesets
 
 ```bash
-# Run tests for specific package
-cd packages/json
-bun test
+# Create a changeset (for versioning)
+bunx changeset
 
-# Run benchmarks for specific package
-cd packages/json
-bun bench
+# Version packages
+bunx changeset version
 
-# Build specific package
-cd packages/json
-bun run build
+# Publish to npm
+bunx changeset publish
 ```
+
+### Documentation
+
+```bash
+# Start docs dev server
+cd docs
+bun dev
+
+# Build docs
+bun docs:build
+
+# Preview built docs
+bun docs:preview
+```
+
+---
+
+## 📚 Documentation
+
+- 📖 [Full Documentation](https://molt.sylph.ai) *(coming soon)*
+- 📊 [Benchmarks](./BENCHMARKS.md)
+- 🔧 [API Reference](./docs/api/)
+- 📦 [Package Guides](./docs/packages/)
 
 ---
 
@@ -140,42 +262,31 @@ bun run build
 
 - **Runtime**: [Bun](https://bun.sh) - Ultra-fast JavaScript runtime
 - **Language**: TypeScript with strict mode
+- **Monorepo**: [Turborepo](https://turbo.build) - High-performance build system
+- **Versioning**: [Changesets](https://github.com/changesets/changesets) - Version management
 - **Testing**: [Vitest](https://vitest.dev) - Fast unit testing
+- **Benchmarking**: Vitest benchmark mode
 - **Bundling**: [tsup](https://tsup.egoist.dev) - TypeScript bundler
 - **Linting**: [Biome](https://biomejs.dev) - Fast linter and formatter
+- **Docs**: [VitePress](https://vitepress.dev) - Documentation site
 - **Acceleration**: Rust + WASM for performance-critical paths
-
----
-
-## 📊 Performance
-
-### molt-json Benchmarks
-
-Real-world benchmarks on 1.5KB malformed JSON with complex types:
-
-| Library | Operations/sec | Speedup |
-|---------|---------------|---------|
-| **@sylphx/molt-json** | **170,000** 🔥 | 1x (baseline) |
-| superjson | 119,000 | 0.7x |
-| dirty-json | 448 | **0.003x** (380x slower) |
-
-See individual packages for detailed benchmarks.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
-
-### Quick Contribution Guide
+We welcome contributions! Here's how to get started:
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature`
 3. Make your changes with tests
-4. Run tests: `bun test`
-5. Lint: `bun lint:fix`
-6. Commit: `git commit -m "feat(json): add awesome feature"`
-7. Push and create a Pull Request
+4. Run tests: `turbo test`
+5. Create a changeset: `bunx changeset`
+6. Lint: `bun lint:fix`
+7. Commit: `git commit -m "feat(json): add awesome feature"`
+8. Push and create a Pull Request
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
@@ -191,20 +302,21 @@ Each package in this monorepo is licensed under the MIT License.
 
 Built with inspiration from:
 - [dirty-json](https://github.com/RyanMarcus/dirty-json) - Original dirty JSON parser
-- [superjson](https://github.com/flightcontrolhq/superjson) - Type-preserving JSON serialization
+- [superjson](https://github.com/flightcontrolhq/superjson) - Type-preserving JSON
+- [js-yaml](https://github.com/nodeca/js-yaml) - YAML parser
+- [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) - XML parser
+- [papaparse](https://github.com/mholt/PapaParse) - CSV parser
 
 Made **faster**, **more powerful**, and **production-ready** by [Sylphx](https://github.com/SylphxAI).
 
 ---
 
-## 📚 Resources
+## 🌟 Star History
 
-- [Documentation](./packages/json/README.md)
-- [Contributing Guide](./CONTRIBUTING.md)
-- [Changelog](./CHANGELOG.md)
-- [Issues](https://github.com/SylphxAI/molt/issues)
-- [Discussions](https://github.com/SylphxAI/molt/discussions)
+If you find Molt useful, please consider giving it a star ⭐
+
+[![Star History Chart](https://api.star-history.com/svg?repos=sylphx/molt&type=Date)](https://star-history.com/#sylphx/molt&Date)
 
 ---
 
-**Built with ❤️ by Sylphx**
+**Built with ❤️ by Sylphx** | [Website](https://sylph.ai) | [Twitter](https://twitter.com/sylphxai)
