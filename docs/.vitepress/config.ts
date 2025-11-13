@@ -109,7 +109,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/sylphx/molt' }
+      { icon: 'github', link: 'https://github.com/SylphxAI/molt' }
     ],
 
     footer: {
@@ -123,6 +123,35 @@ export default defineConfig({
   },
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    // Favicons
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }],
+
+    // PWA icons
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+
+    // Meta tags
+    ['meta', { name: 'theme-color', content: '#3b82f6' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+
+    // Open Graph
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: 'Molt' }],
+    ['meta', { property: 'og:title', content: 'Molt - High-Performance Data Transformation' }],
+    ['meta', { property: 'og:description', content: 'High-performance data transformation stack for JSON, YAML, TOML, CSV, XML, INI, MessagePack, and TOON. Up to 415x faster than alternatives.' }],
+    ['meta', { property: 'og:image', content: 'https://molt.vercel.app/og-image.png' }],
+    ['meta', { property: 'og:url', content: 'https://molt.vercel.app' }],
+
+    // Twitter Card
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: 'Molt - High-Performance Data Transformation' }],
+    ['meta', { name: 'twitter:description', content: 'High-performance data transformation stack. Up to 415x faster than alternatives.' }],
+    ['meta', { name: 'twitter:image', content: 'https://molt.vercel.app/og-image.png' }],
+
+    // Additional SEO
+    ['meta', { name: 'keywords', content: 'data transformation, JSON parser, YAML parser, TOML parser, CSV parser, XML parser, INI parser, MessagePack, high performance, TypeScript' }],
+    ['meta', { name: 'author', content: 'Sylphx' }]
   ]
 })
