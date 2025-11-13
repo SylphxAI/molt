@@ -1,6 +1,6 @@
 {
   "name": "@sylphx/molt-toml",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TOML transformer - handle dirty TOML with type preservation",
   "type": "module",
   "main": "./dist/index.cjs",
