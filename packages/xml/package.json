@@ -1,6 +1,6 @@
 {
   "name": "@sylphx/molt-xml",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "XML transformer - dirty cleaning, type preservation, and streaming",
   "type": "module",
   "main": "./dist/index.cjs",
