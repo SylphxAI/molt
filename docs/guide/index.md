@@ -11,8 +11,11 @@ Molt is a comprehensive suite of data transformation libraries built for perform
 - **@sylphx/molt-json** - Type-preserving JSON parser and serializer
 - **@sylphx/molt-yaml** - Ultra-fast YAML processor
 - **@sylphx/molt-toml** - High-performance TOML parser
+- **@sylphx/molt-ini** - Fast INI configuration parser
 - **@sylphx/molt-csv** - Blazingly fast CSV handler
 - **@sylphx/molt-xml** - Competitive XML parser with dirty input support
+- **@sylphx/molt-msgpack** - Binary MessagePack encoder/decoder
+- **@sylphx/molt-toon** - LLM-optimized Token-Oriented Object Notation
 
 ## Why Choose Molt?
 
@@ -25,8 +28,11 @@ Molt consistently outperforms industry-standard libraries across all formats:
 | YAML | 1,021,050 ops/s | **2.87x faster** than js-yaml |
 | TOML | 892,620 ops/s | **2.07x faster** than @iarna/toml |
 | JSON | 610,000 ops/s | **1.7x faster** serialization |
+| INI | High | **2-3x faster** than ini (npm) |
 | CSV | 775,770 ops/s | **5.9x faster** than papaparse |
 | XML | 102,975 ops/s | Matches fast-xml-parser |
+| MessagePack | Competitive | Comparable to @msgpack/msgpack |
+| TOON | N/A | **30-60% fewer tokens** for LLMs |
 
 See [Benchmarks](/benchmarks) for detailed comparisons.
 
@@ -154,6 +160,44 @@ import { parse, toObject } from '@sylphx/molt-xml'
 
 const doc = parse('<root><item>value</item></root>')
 const obj = toObject(doc)
+```
+
+### INI
+
+```typescript
+import { molt } from '@sylphx/molt-ini'
+
+const config = molt(`
+[database]
+host = localhost
+port = 5432
+`)
+```
+
+### MessagePack
+
+```typescript
+import { encode, decode } from '@sylphx/molt-msgpack'
+
+const binary = encode({ user: 'alice' })
+const data = decode(binary)
+```
+
+### TOON
+
+```typescript
+import { parseTOON, serializeTOON } from '@sylphx/molt-toon'
+
+// Parse TOON format
+const data = parseTOON(`
+users:
+  id | name  | age
+  1  | Alice | 30
+  2  | Bob   | 25
+`)
+
+// Serialize to TOON (30-60% fewer tokens)
+const toon = serializeTOON(data)
 ```
 
 ## Next Steps

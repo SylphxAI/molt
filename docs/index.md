@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "Molt"
   text: "Data Transformation Stack"
-  tagline: High-performance data transformation libraries for JSON, XML, YAML, TOML, and CSV
+  tagline: High-performance data transformation for JSON, YAML, TOML, INI, CSV, XML, MessagePack, and TOON
   image:
     src: /logo.svg
     alt: Molt
@@ -46,8 +46,11 @@ Molt is a comprehensive data transformation stack built for performance-critical
 - **molt-yaml**: Dominates YAML parsing (2-415x faster)
 - **molt-toml**: Clear TOML performance winner (2-9x faster)
 - **molt-json**: Best-in-class JSON serialization (1.7-2.3x faster)
+- **molt-ini**: Fast INI configuration (2-3x faster)
 - **molt-csv**: Highly competitive CSV parsing (top-tier performance)
 - **molt-xml**: Matches fastest parsers with unique dirty XML support
+- **molt-msgpack**: Competitive binary format (20-50% smaller than JSON)
+- **molt-toon**: LLM-optimized format (30-60% token savings)
 
 ### 🚀 Get Started in Seconds
 
@@ -63,11 +66,23 @@ npm install @sylphx/molt-yaml
 # TOML configuration
 npm install @sylphx/molt-toml
 
+# INI configuration
+npm install @sylphx/molt-ini
+
 # CSV data handling
 npm install @sylphx/molt-csv
 
 # XML parsing
 npm install @sylphx/molt-xml
+
+# MessagePack binary format
+npm install @sylphx/molt-msgpack
+
+# TOON (LLM-optimized)
+npm install @sylphx/molt-toon
+
+# Or install all formats
+npm install @sylphx/molt
 ```
 
 ### 💪 Production Ready
@@ -140,6 +155,71 @@ Bob,25,San Francisco
 
 stringify(records)
 ```
+
+### INI Configuration
+
+```typescript
+import { molt } from '@sylphx/molt-ini'
+
+const config = molt(`
+[database]
+host = localhost
+port = 5432
+
+[server]
+timeout = 30
+`)
+
+console.log(config.database.port) // 5432
+```
+
+### MessagePack Binary
+
+```typescript
+import { encode, decode } from '@sylphx/molt-msgpack'
+
+const data = { user: 'alice', score: 9999 }
+
+// Encode to binary (20-50% smaller than JSON)
+const binary = encode(data)
+
+// Decode back to JavaScript
+const restored = decode(binary)
+```
+
+### TOON for LLMs
+
+```typescript
+import { stringify } from '@sylphx/molt-toon'
+
+const data = {
+  users: [
+    { id: 1, name: 'Alice', role: 'admin' },
+    { id: 2, name: 'Bob', role: 'user' }
+  ]
+}
+
+// 30-60% fewer tokens!
+console.log(stringify(data))
+// Output:
+// users:
+//   id | name  | role
+//   1  | Alice | admin
+//   2  | Bob   | user
+```
+
+## All Packages
+
+| Package | Purpose | Performance | Key Features |
+|---------|---------|-------------|--------------|
+| **@sylphx/molt-json** | JSON with types | 1.7-2.5x faster | Type preservation, dirty JSON support |
+| **@sylphx/molt-yaml** | YAML parsing | 2-415x faster | Full YAML 1.2, anchors, multi-doc |
+| **@sylphx/molt-toml** | TOML config | 2-9x faster | Nested tables, arrays, type-safe |
+| **@sylphx/molt-ini** | INI config | 2-3x faster | Git/PHP/Windows INI compatible |
+| **@sylphx/molt-csv** | CSV data | Top-tier | Type detection, WASM acceleration |
+| **@sylphx/molt-xml** | XML parsing | Matches fastest | Dirty XML cleaning, namespace support |
+| **@sylphx/molt-msgpack** | Binary format | Competitive | 20-50% smaller, full type support |
+| **@sylphx/molt-toon** | LLM-optimized | 30-60% tokens | Table format, minimal quoting |
 
 ## Documentation
 

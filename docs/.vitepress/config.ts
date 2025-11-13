@@ -109,7 +109,9 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/SylphxAI/molt' }
+      { icon: 'github', link: 'https://github.com/SylphxAI/molt' },
+      { icon: 'x', link: 'https://x.com/SylphxAI' },
+      { icon: 'npm', link: 'https://www.npmjs.com/org/sylphx' }
     ],
 
     footer: {

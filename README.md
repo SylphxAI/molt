@@ -5,9 +5,11 @@
 [![Bun](https://img.shields.io/badge/Bun-%3E%3D1.0-black)](https://bun.sh)
 [![Turbo](https://img.shields.io/badge/Turborepo-enabled-blue)](https://turbo.build)
 
-**High-performance data transformation stack** for JSON, YAML, TOML, CSV, XML, INI, MessagePack, and TOON.
+**High-performance data transformation stack** for JSON, YAML, TOML, INI, CSV, XML, MessagePack, and TOON.
 
-> 🏆 **415x faster YAML** | **9x faster TOML** | **30-60% LLM token savings with TOON**
+> 🏆 **415x faster YAML** | **9x faster TOML** | **2-3x faster INI** | **30-60% LLM token savings**
+
+📦 [npm](https://www.npmjs.com/org/sylphx) | 🐙 [GitHub](https://github.com/SylphxAI/molt) | 🐦 [Twitter](https://x.com/SylphxAI)
 
 ---
 
