@@ -1,5 +1,7 @@
 import { bench, describe } from 'vitest';
 import { parseYAML, stringifyYAML } from '../src/index.js';
+import jsyaml from 'js-yaml';
+import YAML from 'yaml';
 
 /**
  * YAML Parsing Benchmarks vs Competitors
@@ -148,36 +150,34 @@ describe('YAML Parsing Performance', () => {
   // Competitors (install with: bun add -D js-yaml yaml)
   // Uncomment when packages are installed:
 
-  // import jsyaml from 'js-yaml';
-  // bench('js-yaml: simple config', () => {
-  //   jsyaml.load(simpleYAML);
-  // });
-  // bench('js-yaml: complex nested', () => {
-  //   jsyaml.load(complexYAML);
-  // });
-  // bench('js-yaml: anchors and aliases', () => {
-  //   jsyaml.load(anchorsYAML);
-  // });
-  // bench('js-yaml: multiline strings', () => {
-  //   jsyaml.load(multilineYAML);
-  // });
+  bench('js-yaml: simple config', () => {
+    jsyaml.load(simpleYAML);
+  });
+  bench('js-yaml: complex nested', () => {
+    jsyaml.load(complexYAML);
+  });
+  bench('js-yaml: anchors and aliases', () => {
+    jsyaml.load(anchorsYAML);
+  });
+  bench('js-yaml: multiline strings', () => {
+    jsyaml.load(multilineYAML);
+  });
 
-  // import YAML from 'yaml';
-  // bench('yaml: simple config', () => {
-  //   YAML.parse(simpleYAML);
-  // });
-  // bench('yaml: complex nested', () => {
-  //   YAML.parse(complexYAML);
-  // });
-  // bench('yaml: anchors and aliases', () => {
-  //   YAML.parse(anchorsYAML);
-  // });
-  // bench('yaml: multi-document', () => {
-  //   YAML.parseAllDocuments(multiDocYAML);
-  // });
-  // bench('yaml: multiline strings', () => {
-  //   YAML.parse(multilineYAML);
-  // });
+  bench('yaml: simple config', () => {
+    YAML.parse(simpleYAML);
+  });
+  bench('yaml: complex nested', () => {
+    YAML.parse(complexYAML);
+  });
+  bench('yaml: anchors and aliases', () => {
+    YAML.parse(anchorsYAML);
+  });
+  bench('yaml: multi-document', () => {
+    YAML.parseAllDocuments(multiDocYAML);
+  });
+  bench('yaml: multiline strings', () => {
+    YAML.parse(multilineYAML);
+  });
 });
 
 describe('YAML Serialization Performance', () => {
@@ -228,21 +228,19 @@ describe('YAML Serialization Performance', () => {
   });
 
   // Competitors
-  // import jsyaml from 'js-yaml';
-  // bench('js-yaml: stringify simple', () => {
-  //   jsyaml.dump(simpleObj);
-  // });
-  // bench('js-yaml: stringify complex', () => {
-  //   jsyaml.dump(complexObj);
-  // });
+  bench('js-yaml: stringify simple', () => {
+    jsyaml.dump(simpleObj);
+  });
+  bench('js-yaml: stringify complex', () => {
+    jsyaml.dump(complexObj);
+  });
 
-  // import YAML from 'yaml';
-  // bench('yaml: stringify simple', () => {
-  //   YAML.stringify(simpleObj);
-  // });
-  // bench('yaml: stringify complex', () => {
-  //   YAML.stringify(complexObj);
-  // });
+  bench('yaml: stringify simple', () => {
+    YAML.stringify(simpleObj);
+  });
+  bench('yaml: stringify complex', () => {
+    YAML.stringify(complexObj);
+  });
 });
 
 describe('YAML Round-trip Performance', () => {
@@ -252,17 +250,17 @@ describe('YAML Round-trip Performance', () => {
     parseYAML(stringified);
   });
 
-  // bench('js-yaml: parse → stringify → parse', () => {
-  //   const parsed = jsyaml.load(complexYAML);
-  //   const stringified = jsyaml.dump(parsed);
-  //   jsyaml.load(stringified);
-  // });
+  bench('js-yaml: parse → stringify → parse', () => {
+    const parsed = jsyaml.load(complexYAML);
+    const stringified = jsyaml.dump(parsed);
+    jsyaml.load(stringified);
+  });
 
-  // bench('yaml: parse → stringify → parse', () => {
-  //   const parsed = YAML.parse(complexYAML);
-  //   const stringified = YAML.stringify(parsed);
-  //   YAML.parse(stringified);
-  // });
+  bench('yaml: parse → stringify → parse', () => {
+    const parsed = YAML.parse(complexYAML);
+    const stringified = YAML.stringify(parsed);
+    YAML.parse(stringified);
+  });
 });
 
 describe('YAML Large Document Performance', () => {
@@ -282,11 +280,11 @@ describe('YAML Large Document Performance', () => {
     parseYAML(largeYAML);
   });
 
-  // bench('js-yaml: parse 1000 items', () => {
-  //   jsyaml.load(largeYAML);
-  // });
+  bench('js-yaml: parse 1000 items', () => {
+    jsyaml.load(largeYAML);
+  });
 
-  // bench('yaml: parse 1000 items', () => {
-  //   YAML.parse(largeYAML);
-  // });
+  bench('yaml: parse 1000 items', () => {
+    YAML.parse(largeYAML);
+  });
 });

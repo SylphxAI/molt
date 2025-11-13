@@ -1,5 +1,9 @@
 import { bench, describe } from 'vitest';
 import { parseCSV, stringifyCSV } from '../src/index.js';
+import Papa from 'papaparse';
+import { parse } from 'csv-parse/sync';
+import { csvParse, csvFormat } from 'd3-dsv';
+import { stringify } from 'csv-stringify/sync';
 
 /**
  * CSV Parsing Benchmarks vs Competitors
@@ -79,44 +83,41 @@ describe('CSV Parsing Performance', () => {
   // Competitors (install with: bun add -D papaparse csv-parse d3-dsv)
   // Uncomment when packages are installed:
 
-  // import Papa from 'papaparse';
-  // bench('papaparse: simple CSV', () => {
-  //   Papa.parse(simpleCSV, { header: true });
-  // });
-  // bench('papaparse: complex CSV', () => {
-  //   Papa.parse(complexCSV, { header: true });
-  // });
-  // bench('papaparse: large CSV', () => {
-  //   Papa.parse(largeCSV, { header: true });
-  // });
-  // bench('papaparse: quoted fields', () => {
-  //   Papa.parse(quotedCSV, { header: true });
-  // });
+  bench('papaparse: simple CSV', () => {
+    Papa.parse(simpleCSV, { header: true });
+  });
+  bench('papaparse: complex CSV', () => {
+    Papa.parse(complexCSV, { header: true });
+  });
+  bench('papaparse: large CSV', () => {
+    Papa.parse(largeCSV, { header: true });
+  });
+  bench('papaparse: quoted fields', () => {
+    Papa.parse(quotedCSV, { header: true });
+  });
 
-  // import { parse } from 'csv-parse/sync';
-  // bench('csv-parse: simple CSV', () => {
-  //   parse(simpleCSV, { columns: true });
-  // });
-  // bench('csv-parse: complex CSV', () => {
-  //   parse(complexCSV, { columns: true });
-  // });
-  // bench('csv-parse: large CSV', () => {
-  //   parse(largeCSV, { columns: true });
-  // });
-  // bench('csv-parse: quoted fields', () => {
-  //   parse(quotedCSV, { columns: true });
-  // });
+  bench('csv-parse: simple CSV', () => {
+    parse(simpleCSV, { columns: true });
+  });
+  bench('csv-parse: complex CSV', () => {
+    parse(complexCSV, { columns: true });
+  });
+  bench('csv-parse: large CSV', () => {
+    parse(largeCSV, { columns: true });
+  });
+  bench('csv-parse: quoted fields', () => {
+    parse(quotedCSV, { columns: true });
+  });
 
-  // import { csvParse } from 'd3-dsv';
-  // bench('d3-dsv: simple CSV', () => {
-  //   csvParse(simpleCSV);
-  // });
-  // bench('d3-dsv: complex CSV', () => {
-  //   csvParse(complexCSV);
-  // });
-  // bench('d3-dsv: large CSV', () => {
-  //   csvParse(largeCSV);
-  // });
+  bench('d3-dsv: simple CSV', () => {
+    csvParse(simpleCSV);
+  });
+  bench('d3-dsv: complex CSV', () => {
+    csvParse(complexCSV);
+  });
+  bench('d3-dsv: large CSV', () => {
+    csvParse(largeCSV);
+  });
 });
 
 describe('CSV Serialization Performance', () => {
@@ -165,38 +166,35 @@ describe('CSV Serialization Performance', () => {
   });
 
   // Competitors
-  // import Papa from 'papaparse';
-  // bench('papaparse: stringify simple', () => {
-  //   Papa.unparse(simpleData);
-  // });
-  // bench('papaparse: stringify complex', () => {
-  //   Papa.unparse(complexData);
-  // });
-  // bench('papaparse: stringify large', () => {
-  //   Papa.unparse(largeData);
-  // });
+  bench('papaparse: stringify simple', () => {
+    Papa.unparse(simpleData);
+  });
+  bench('papaparse: stringify complex', () => {
+    Papa.unparse(complexData);
+  });
+  bench('papaparse: stringify large', () => {
+    Papa.unparse(largeData);
+  });
 
-  // import { stringify } from 'csv-stringify/sync';
-  // bench('csv-stringify: simple', () => {
-  //   stringify(simpleData, { header: true });
-  // });
-  // bench('csv-stringify: complex', () => {
-  //   stringify(complexData, { header: true });
-  // });
-  // bench('csv-stringify: large', () => {
-  //   stringify(largeData, { header: true });
-  // });
+  bench('csv-stringify: simple', () => {
+    stringify(simpleData, { header: true });
+  });
+  bench('csv-stringify: complex', () => {
+    stringify(complexData, { header: true });
+  });
+  bench('csv-stringify: large', () => {
+    stringify(largeData, { header: true });
+  });
 
-  // import { csvFormat } from 'd3-dsv';
-  // bench('d3-dsv: stringify simple', () => {
-  //   csvFormat(simpleData);
-  // });
-  // bench('d3-dsv: stringify complex', () => {
-  //   csvFormat(complexData);
-  // });
-  // bench('d3-dsv: stringify large', () => {
-  //   csvFormat(largeData);
-  // });
+  bench('d3-dsv: stringify simple', () => {
+    csvFormat(simpleData);
+  });
+  bench('d3-dsv: stringify complex', () => {
+    csvFormat(complexData);
+  });
+  bench('d3-dsv: stringify large', () => {
+    csvFormat(largeData);
+  });
 });
 
 describe('CSV Round-trip Performance', () => {
@@ -212,11 +210,11 @@ describe('CSV Round-trip Performance', () => {
     stringifyCSV(parsed);
   });
 
-  // bench('papaparse: parse → stringify → parse', () => {
-  //   const csv = Papa.unparse(data);
-  //   const parsed = Papa.parse(csv, { header: true }).data;
-  //   Papa.unparse(parsed);
-  // });
+  bench('papaparse: parse → stringify → parse', () => {
+    const csv = Papa.unparse(data);
+    const parsed = Papa.parse(csv, { header: true }).data;
+    Papa.unparse(parsed);
+  });
 });
 
 describe('CSV Type Conversion Overhead', () => {
@@ -248,11 +246,11 @@ describe('CSV Memory Efficiency', () => {
     parseCSV(veryLargeCSV);
   });
 
-  // bench('papaparse: parse 10k rows', () => {
-  //   Papa.parse(veryLargeCSV, { header: true });
-  // });
+  bench('papaparse: parse 10k rows', () => {
+    Papa.parse(veryLargeCSV, { header: true });
+  });
 
-  // bench('csv-parse: parse 10k rows', () => {
-  //   parse(veryLargeCSV, { columns: true });
-  // });
+  bench('csv-parse: parse 10k rows', () => {
+    parse(veryLargeCSV, { columns: true });
+  });
 });

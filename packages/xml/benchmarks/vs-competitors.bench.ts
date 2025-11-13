@@ -1,5 +1,9 @@
 import { bench, describe } from 'vitest';
 import { parseXML, toObject, cleanDirtyXML } from '../src/index.js';
+import { XMLParser } from 'fast-xml-parser';
+import xml2js from 'xml2js';
+
+const fxpParser = new XMLParser();
 
 /**
  * XML Parsing Benchmarks vs Competitors
@@ -140,31 +144,28 @@ describe('XML Parsing Performance', () => {
   // Competitors (install with: bun add -D fast-xml-parser xml2js xml-js)
   // Uncomment when packages are installed:
 
-  // import { XMLParser } from 'fast-xml-parser';
-  // const fxpParser = new XMLParser();
-  // bench('fast-xml-parser: simple config', () => {
-  //   fxpParser.parse(simpleXML);
-  // });
-  // bench('fast-xml-parser: complex nested', () => {
-  //   fxpParser.parse(complexXML);
-  // });
-  // bench('fast-xml-parser: attributes', () => {
-  //   fxpParser.parse(attributesXML);
-  // });
-  // bench('fast-xml-parser: CDATA sections', () => {
-  //   fxpParser.parse(cdataXML);
-  // });
+  bench('fast-xml-parser: simple config', () => {
+    fxpParser.parse(simpleXML);
+  });
+  bench('fast-xml-parser: complex nested', () => {
+    fxpParser.parse(complexXML);
+  });
+  bench('fast-xml-parser: attributes', () => {
+    fxpParser.parse(attributesXML);
+  });
+  bench('fast-xml-parser: CDATA sections', () => {
+    fxpParser.parse(cdataXML);
+  });
 
-  // import xml2js from 'xml2js';
-  // bench('xml2js: simple config', async () => {
-  //   await xml2js.parseStringPromise(simpleXML);
-  // });
-  // bench('xml2js: complex nested', async () => {
-  //   await xml2js.parseStringPromise(complexXML);
-  // });
-  // bench('xml2js: attributes', async () => {
-  //   await xml2js.parseStringPromise(attributesXML);
-  // });
+  bench('xml2js: simple config', async () => {
+    await xml2js.parseStringPromise(simpleXML);
+  });
+  bench('xml2js: complex nested', async () => {
+    await xml2js.parseStringPromise(complexXML);
+  });
+  bench('xml2js: attributes', async () => {
+    await xml2js.parseStringPromise(attributesXML);
+  });
 
   // import { xml2js as xmljs } from 'xml-js';
   // bench('xml-js: simple config', () => {
@@ -192,14 +193,12 @@ describe('XML to Object Conversion Performance', () => {
   });
 
   // Competitors with object output
-  // import { XMLParser } from 'fast-xml-parser';
-  // const fxpParser = new XMLParser();
-  // bench('fast-xml-parser: toObject simple', () => {
-  //   fxpParser.parse(simpleXML);
-  // });
-  // bench('fast-xml-parser: toObject complex', () => {
-  //   fxpParser.parse(complexXML);
-  // });
+  bench('fast-xml-parser: toObject simple', () => {
+    fxpParser.parse(simpleXML);
+  });
+  bench('fast-xml-parser: toObject complex', () => {
+    fxpParser.parse(complexXML);
+  });
 });
 
 describe('Dirty XML Cleaning Performance', () => {
@@ -245,13 +244,13 @@ describe('XML Large Document Performance', () => {
     toObject(largeXML);
   });
 
-  // bench('fast-xml-parser: parse 1000 items', () => {
-  //   fxpParser.parse(largeXML);
-  // });
+  bench('fast-xml-parser: parse 1000 items', () => {
+    fxpParser.parse(largeXML);
+  });
 
-  // bench('xml2js: parse 1000 items', async () => {
-  //   await xml2js.parseStringPromise(largeXML);
-  // });
+  bench('xml2js: parse 1000 items', async () => {
+    await xml2js.parseStringPromise(largeXML);
+  });
 });
 
 describe('XML with Mixed Content', () => {

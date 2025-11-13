@@ -1,5 +1,7 @@
 import { bench, describe } from 'vitest';
 import { parseTOML, stringifyTOML } from '../src/index.js';
+import TOML from '@iarna/toml';
+import { parse as smolParse } from 'smol-toml';
 
 /**
  * TOML Parsing Benchmarks vs Competitors
@@ -80,30 +82,25 @@ describe('TOML Parsing Performance', () => {
     parseTOML(arrayOfTablesTOML);
   });
 
-  // Competitors (install with: bun add -D @iarna/toml smol-toml)
-  // Uncomment when packages are installed:
+  bench('@iarna/toml: simple config', () => {
+    TOML.parse(simpleTOML);
+  });
+  bench('@iarna/toml: nested tables', () => {
+    TOML.parse(nestedTOML);
+  });
+  bench('@iarna/toml: array of tables', () => {
+    TOML.parse(arrayOfTablesTOML);
+  });
 
-  // import TOML from '@iarna/toml';
-  // bench('@iarna/toml: simple config', () => {
-  //   TOML.parse(simpleTOML);
-  // });
-  // bench('@iarna/toml: nested tables', () => {
-  //   TOML.parse(nestedTOML);
-  // });
-  // bench('@iarna/toml: array of tables', () => {
-  //   TOML.parse(arrayOfTablesTOML);
-  // });
-
-  // import { parse as smolParse } from 'smol-toml';
-  // bench('smol-toml: simple config', () => {
-  //   smolParse(simpleTOML);
-  // });
-  // bench('smol-toml: nested tables', () => {
-  //   smolParse(nestedTOML);
-  // });
-  // bench('smol-toml: array of tables', () => {
-  //   smolParse(arrayOfTablesTOML);
-  // });
+  bench('smol-toml: simple config', () => {
+    smolParse(simpleTOML);
+  });
+  bench('smol-toml: nested tables', () => {
+    smolParse(nestedTOML);
+  });
+  bench('smol-toml: array of tables', () => {
+    smolParse(arrayOfTablesTOML);
+  });
 });
 
 describe('TOML Serialization Performance', () => {
@@ -146,14 +143,12 @@ describe('TOML Serialization Performance', () => {
     stringifyTOML(nestedObj);
   });
 
-  // Competitors
-  // import TOML from '@iarna/toml';
-  // bench('@iarna/toml: stringify simple', () => {
-  //   TOML.stringify(simpleObj);
-  // });
-  // bench('@iarna/toml: stringify nested', () => {
-  //   TOML.stringify(nestedObj);
-  // });
+  bench('@iarna/toml: stringify simple', () => {
+    TOML.stringify(simpleObj);
+  });
+  bench('@iarna/toml: stringify nested', () => {
+    TOML.stringify(nestedObj);
+  });
 });
 
 describe('TOML Round-trip Performance', () => {
@@ -163,9 +158,9 @@ describe('TOML Round-trip Performance', () => {
     parseTOML(stringified);
   });
 
-  // bench('@iarna/toml: parse → stringify → parse', () => {
-  //   const parsed = TOML.parse(nestedTOML);
-  //   const stringified = TOML.stringify(parsed);
-  //   TOML.parse(stringified);
-  // });
+  bench('@iarna/toml: parse → stringify → parse', () => {
+    const parsed = TOML.parse(nestedTOML);
+    const stringified = TOML.stringify(parsed);
+    TOML.parse(stringified);
+  });
 });
