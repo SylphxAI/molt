@@ -46,13 +46,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sylphx/molt.git",
+    "url": "git+https://github.com/SylphxAI/molt.git",
     "directory": "packages/yaml"
   },
   "bugs": {
-    "url": "https://github.com/sylphx/molt/issues"
+    "url": "https://github.com/SylphxAI/molt/issues"
   },
-  "homepage": "https://github.com/sylphx/molt/tree/main/packages/yaml#readme",
+  "homepage": "https://github.com/SylphxAI/molt#readme",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/node": "^22.9.0",

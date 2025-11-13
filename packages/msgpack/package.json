@@ -40,13 +40,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sylphx/molt.git",
+    "url": "git+https://github.com/SylphxAI/molt.git",
     "directory": "packages/msgpack"
   },
   "bugs": {
-    "url": "https://github.com/sylphx/molt/issues"
+    "url": "https://github.com/SylphxAI/molt/issues"
   },
-  "homepage": "https://github.com/sylphx/molt/tree/main/packages/msgpack#readme",
+  "homepage": "https://github.com/SylphxAI/molt#readme",
   "devDependencies": {
     "@msgpack/msgpack": "^3.0.0-beta2",
     "msgpack-lite": "^0.1.26",

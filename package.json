@@ -46,12 +46,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sylphx/molt.git"
+    "url": "git+https://github.com/SylphxAI/molt.git"
   },
   "bugs": {
-    "url": "https://github.com/sylphx/molt/issues"
+    "url": "https://github.com/SylphxAI/molt/issues"
   },
-  "homepage": "https://github.com/sylphx/molt#readme",
+  "homepage": "https://github.com/SylphxAI/molt#readme",
   "author": "Sylphx",
   "license": "MIT"
 }

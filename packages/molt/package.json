@@ -55,13 +55,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sylphx/molt.git",
+    "url": "git+https://github.com/SylphxAI/molt.git",
     "directory": "packages/molt"
   },
   "bugs": {
-    "url": "https://github.com/sylphx/molt/issues"
+    "url": "https://github.com/SylphxAI/molt/issues"
   },
-  "homepage": "https://github.com/sylphx/molt/tree/main/packages/molt#readme",
+  "homepage": "https://github.com/SylphxAI/molt#readme",
   "dependencies": {
     "@sylphx/molt-json": "workspace:*",
     "@sylphx/molt-yaml": "workspace:*",

@@ -39,13 +39,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sylphx/molt.git",
+    "url": "git+https://github.com/SylphxAI/molt.git",
     "directory": "packages/ini"
   },
   "bugs": {
-    "url": "https://github.com/sylphx/molt/issues"
+    "url": "https://github.com/SylphxAI/molt/issues"
   },
-  "homepage": "https://github.com/sylphx/molt/tree/main/packages/ini#readme",
+  "homepage": "https://github.com/SylphxAI/molt#readme",
   "devDependencies": {
     "ini": "^5.0.0",
     "tsup": "^8.3.5",
