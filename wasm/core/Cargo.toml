@@ -1,0 +1,20 @@
+[package]
+name = "molt-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Shared parsing core for molt data transformation stack"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

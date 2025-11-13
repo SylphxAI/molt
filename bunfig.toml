@@ -1,0 +1,5 @@
+# Bun configuration for molt monorepo
+
+[install]
+auto = true
+peer = true

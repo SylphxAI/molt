@@ -1,0 +1,20 @@
+{
+  "name": "molt-json-wasm",
+  "collaborators": [
+    "Sylphx <https://github.com/SylphxAI>"
+  ],
+  "description": "WASM-accelerated JSON transformer for molt",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SylphxAI/molt"
+  },
+  "files": [
+    "molt_json_wasm_bg.wasm",
+    "molt_json_wasm.js",
+    "molt_json_wasm.d.ts"
+  ],
+  "main": "molt_json_wasm.js",
+  "types": "molt_json_wasm.d.ts"
+}
