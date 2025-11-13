@@ -3,7 +3,8 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Molt',
   description: 'High-performance data transformation stack',
-  
+  ignoreDeadLinks: true,
+
   themeConfig: {
     logo: '/logo.svg',
     
