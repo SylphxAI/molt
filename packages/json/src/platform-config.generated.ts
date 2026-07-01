@@ -4,7 +4,6 @@
 // Runtime: v24.3.0
 
 import { cleanDirtyJSON } from './cleaner.js';
-import { cleanWithWasm, cleanWithWasmSimd } from './wasm-loader.js';
 import type { EngineStrategy } from './engine-selector.js';
 
 export const PLATFORM_STRATEGIES: EngineStrategy[] = [

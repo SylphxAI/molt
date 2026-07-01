@@ -70,16 +70,16 @@ Ensure everything builds and tests pass:
 
 ```bash
 # Build all packages
-bun build
+bun run build
 
 # Run all tests
-bun test
+bun run test
 
 # Run benchmarks (optional)
 bun bench
 
 # Lint code
-bun lint
+bun run lint
 ```
 
 ### 4. Commit Version Changes
@@ -92,23 +92,16 @@ git push
 
 ### 5. Publish to npm
 
-**Manual publish:**
+**Publish via GitHub Actions:**
 
-```bash
-bun release
-```
-
-This will:
-- Build all packages with Turbo
-- Run `changeset publish`
-- Publish to npm registry
+Do not publish from a workstation. Push to `main` and let `.github/workflows/release.yml` call the Sylphx release workflow, which versions with Changesets, materializes workspace ranges, audits packed tarballs, and publishes those audited tarballs.
 
 **Automated publish via GitHub Actions:**
 
 1. Push to `main` branch
 2. GitHub Actions will:
    - Create a "Version Packages" PR
-   - When merged, automatically publish to npm
+   - When merged, build packages, audit packed tarballs, and publish to npm
 
 ---
 
@@ -171,7 +164,7 @@ bun add @sylphx/molt
 
 # Test imports
 echo "import { molt } from '@sylphx/molt-json'; console.log('OK')" > test.js
-bun test.js
+bun run test.js
 ```
 
 ### 3. Update Documentation Site
@@ -199,7 +192,7 @@ For future releases, follow the same process:
 1. Make changes and add tests
 2. Create changesets: `bunx changeset`
 3. Version packages: `bunx changeset version`
-4. Build and test: `bun build && bun test`
+4. Build and test: `bun run build && bun run test`
 5. Commit and push
 6. GitHub Actions will handle publishing
 
@@ -213,17 +206,17 @@ For future releases, follow the same process:
 # Clean and rebuild
 bun clean
 bun install
-bun build
+bun run build
 ```
 
 ### Test Failures
 
 ```bash
 # Run tests in watch mode
-bun test:watch
+bun run test:watch
 
 # Run tests with coverage
-bun test:coverage
+bun run test:coverage
 ```
 
 ### Publishing Errors
@@ -235,9 +228,8 @@ npm whoami
 # Verify package.json is correct
 cat packages/*/package.json
 
-# Manually publish a single package
-cd packages/json
-npm publish --access public
+# Do not manually publish workspace packages.
+# Re-run the GitHub release workflow after fixing the root cause; it audits packed tarballs before publishing.
 ```
 
 ---

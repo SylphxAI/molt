@@ -306,8 +306,8 @@ turbo test
 turbo bench
 
 # Lint and format
-bun lint
-bun format
+bun run lint
+bun run format
 ```
 
 ### Working with Changesets
@@ -320,7 +320,7 @@ bunx changeset
 bunx changeset version
 
 # Publish to npm
-bunx changeset publish
+# Push to main and let the Sylphx release workflow publish audited tarballs
 ```
 
 ### Documentation
@@ -372,7 +372,7 @@ We welcome contributions! Here's how to get started:
 3. Make your changes with tests
 4. Run tests: `turbo test`
 5. Create a changeset: `bunx changeset`
-6. Lint: `bun lint:fix`
+6. Lint: `bun run lint:fix`
 7. Commit: `git commit -m "feat(json): add awesome feature"`
 8. Push and create a Pull Request
 
