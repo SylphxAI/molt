@@ -19,7 +19,8 @@
     "docs:preview": "vitepress preview docs",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "turbo build && changeset publish"
+    "release": "echo \"Direct changeset publish is unsafe for workspace packages; use the Sylphx release workflow.\" && exit 1",
+    "version-packages": "changeset version"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
