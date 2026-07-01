@@ -8,3 +8,5 @@ coverage
 .vitest
 *.tsbuildinfo
 .vercel
+
+.turbo/cache

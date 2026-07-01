@@ -1,5 +1,11 @@
 # @sylphx/molt
 
+## 1.0.3
+
+### Patch Changes
+
+- 3aa44f2: Republish the meta package with resolved internal dependency metadata so npm consumers no longer receive `workspace:*` ranges.
+
 ## 1.0.2
 
 ### Patch Changes
